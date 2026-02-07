@@ -1,5 +1,6 @@
 class Solution {
 public:
+    bool solved = false;
     bool isCorrectNum(vector<vector<char>> &board, int row, int col, char dig){
         //horizontal check
         for(int j=0; j<9; j++){
@@ -21,28 +22,32 @@ public:
         }
         return true;
     }
-    bool setNumber(vector<vector<char>> &board, int row, int col){
-        if(row == 9){
-            return true;
+    void setNumber(vector<vector<char>> &board, int row, int col) {
+        if (row == 9) {
+            solved = true;
+            return;
         }
+
         int nextRow = row, nextCol = col + 1;
-        if(nextCol == 9){
+        if (nextCol == 9) {
             nextRow = row + 1;
             nextCol = 0;
         }
-        if(board[row][col] != '.'){
-            return setNumber(board, nextRow, nextCol);
+
+        if (board[row][col] != '.') {
+            setNumber(board, nextRow, nextCol);
+            return;
         }
-        for(char dig = '1'; dig <= '9'; dig++){
-            if(isCorrectNum(board, row, col, dig)){
+
+        for (char dig = '1'; dig <= '9'; dig++) {
+            if (isCorrectNum(board, row, col, dig)) {
                 board[row][col] = dig;
-                if(setNumber(board, nextRow, nextCol)){
-                    return true;
-                }
+                setNumber(board, nextRow, nextCol);
+
+                if (solved) return;   // manual early stop
                 board[row][col] = '.';
             }
         }
-        return false;
     }
     void solveSudoku(vector<vector<char>>& board) {
         setNumber(board, 0, 0);
