@@ -21,7 +21,7 @@ public:
         }
         return true;
     }
-    bool validCheck(vector<vector<char>> &board, int row, int col){
+    bool setNumber(vector<vector<char>> &board, int row, int col){
         if(row == 9){
             return true;
         }
@@ -31,12 +31,12 @@ public:
             nextCol = 0;
         }
         if(board[row][col] != '.'){
-            return validCheck(board, nextRow, nextCol);
+            return setNumber(board, nextRow, nextCol);
         }
         for(char dig = '1'; dig <= '9'; dig++){
             if(isCorrectNum(board, row, col, dig)){
                 board[row][col] = dig;
-                if(validCheck(board, nextRow, nextCol)){
+                if(setNumber(board, nextRow, nextCol)){
                     return true;
                 }
                 board[row][col] = '.';
@@ -45,6 +45,6 @@ public:
         return false;
     }
     void solveSudoku(vector<vector<char>>& board) {
-        validCheck(board, 0, 0);
+        setNumber(board, 0, 0);
     }
 };
