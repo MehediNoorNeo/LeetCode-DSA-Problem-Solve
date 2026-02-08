@@ -1,15 +1,9 @@
 class Solution {
 public:
     bool isPalindrome(string str){
-        int start = 0;
-        int end = str.length()-1;
-        while(start <= end){
-            if(str[start] != str[end]){
-                return false;
-            }
-            start++; end--;
-        }
-        return true;
+        string str2 = str;
+        reverse(str2.begin(), str2.end());
+        return str2 == str;
     }
     void getAllParts(string s,  vector<vector<string>> &ans, vector<string> &partition){
         //base case
