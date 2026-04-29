@@ -7,18 +7,16 @@ public:
     
     void push(int val) {
         if(s.empty()){
-            s.push({val, val});
+            s.push(make_pair(val, val));
         }
         else{
             int minVal = min(val, s.top().second);
-            s.push({val, minVal});
+            s.push(make_pair(val, minVal));
         }
     }
     
     void pop() {
-        if(!s.empty()){
-            s.pop();
-        }
+        s.pop();
     }
     
     int top() {
