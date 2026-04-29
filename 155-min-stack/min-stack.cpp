@@ -15,7 +15,7 @@ public:
             if(val <= minVal){
                 minVal = val;
             }
-            s.push(make_pair(val, minVal));
+        s.push({val, minVal});
         }
     }
     
