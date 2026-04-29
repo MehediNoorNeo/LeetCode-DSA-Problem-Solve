@@ -7,11 +7,11 @@ public:
     
     void push(int val) {
         if(s.empty()){
-            s.push(make_pair(val, val));
+            s.push({val, val});
         }
         else{
             int minVal = min(val, s.top().second);
-            s.push(make_pair(val, minVal));
+            s.push({val, minVal});
         }
     }
     
